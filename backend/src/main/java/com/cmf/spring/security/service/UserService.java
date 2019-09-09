@@ -11,7 +11,7 @@ import com.cmf.spring.security.repository.UserRepository;
 @Service
 public class UserService {
 
-	private static final String DEFAULT_ROLE = "ROLE_USER";
+	private static final String DEFAULT_ROLE = "ROLE_ADMIN";
 	private UserRepository userRepository;
 	private BCryptPasswordEncoder encoder;
 

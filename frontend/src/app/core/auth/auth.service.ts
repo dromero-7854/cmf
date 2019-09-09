@@ -1,39 +1,46 @@
 // dependencies
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
+// jwt decode
+import * as jwt_decode from 'jwt-decode';
 // models
 import { Credentials } from '../models/core.model';
 // services
 import { AuthTokenService } from './auth-token.service';
-import { HttpResponse } from '@angular/common/http';
-import { finalize } from 'rxjs/operators';
+import { SessionStorageService } from 'ngx-webstorage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  static readonly LOGIN_URL = '/auth';
+  static readonly ADMIN_HOME_URL = '/back-office/admin-home';
   static readonly TOKEN_STORAGE_KEY = 'token';
-
-  redirectToUrl: string = '/back-office/home';
-  loginUrl: string = '/auth';
+  static readonly USER_STORAGE_KEY = 'user';
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
-    private tokenService: AuthTokenService
+    private tokenService: AuthTokenService,
+    private sessionStorage: SessionStorageService
   ) { }
 
   public login(credentials: Credentials): void {
+    let returnUrl = this.route.snapshot.queryParams['returnUrl'] || AuthService.ADMIN_HOME_URL;
     this.tokenService.getResponseHeaders(credentials)
       .subscribe((res: HttpResponse<any>) => {
         this.saveToken(res.headers.get('authorization'));
-        this.router.navigate([this.redirectToUrl]);
+        this.saveUserData();
+        this.router.navigate([returnUrl]);
       });
   }
 
   public logout(): void {
-    localStorage.removeItem(AuthService.TOKEN_STORAGE_KEY);
-    this.router.navigate([this.loginUrl]);
+    this.sessionStorage.clear(AuthService.TOKEN_STORAGE_KEY);
+    this.sessionStorage.clear(AuthService.USER_STORAGE_KEY);
+    this.router.navigate([AuthService.LOGIN_URL]);
   }
 
   public isLoggedIn(): boolean {
@@ -41,11 +48,16 @@ export class AuthService {
   }
 
   private saveToken(token: string) {
-    localStorage.setItem(AuthService.TOKEN_STORAGE_KEY, token);
+    this.sessionStorage.store(AuthService.TOKEN_STORAGE_KEY, token);
+  }
+
+  private saveUserData() {
+    let userData: any = jwt_decode(this.getToken());
+    this.sessionStorage.store(AuthService.USER_STORAGE_KEY, { username: userData.sub, authorities: userData.authorities });
   }
 
   public getToken(): string {
-    return localStorage.getItem(AuthService.TOKEN_STORAGE_KEY);
+    return this.sessionStorage.retrieve(AuthService.TOKEN_STORAGE_KEY);
   }
 
 }

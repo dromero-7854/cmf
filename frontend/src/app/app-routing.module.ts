@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 // dependencies
 import { Routes, RouterModule } from '@angular/router';
+// models
+import { Role } from './core/models/core.model';
 // guards
 import { AuthGuard } from './core/guards/auth.guard';
 // components
@@ -12,9 +14,10 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    canActivate: [AuthGuard],
     path: 'back-office',
-    loadChildren: './modules/back-office/back-office.module#BackOfficeModule'
+    loadChildren: './modules/back-office/back-office.module#BackOfficeModule',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin, Role.SuperAdmin] }
   },
   {
     path: 'front-office',

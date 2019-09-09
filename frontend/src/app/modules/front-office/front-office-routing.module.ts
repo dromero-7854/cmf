@@ -1,5 +1,5 @@
-// dependencies
 import { NgModule } from '@angular/core';
+// dependencies
 import { Routes, RouterModule } from '@angular/router';
 // pages
 import { NewFixedTermDepositComponent } from './components/new-fixed-term-deposit/new-fixed-term-deposit.component';

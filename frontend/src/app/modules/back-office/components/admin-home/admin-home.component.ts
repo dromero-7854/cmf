@@ -5,11 +5,11 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/core/auth/auth.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-admin-home',
+  templateUrl: './admin-home.component.html',
+  styleUrls: ['./admin-home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class AdminHomeComponent implements OnInit {
 
   closeResult: string;
 
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() { }
 
-  open(content) {
+  open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

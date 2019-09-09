@@ -6,7 +6,9 @@ import { SharedModule } from '../../shared/shared.module';
 import { NewFixedTermDepositComponent } from './components/new-fixed-term-deposit/new-fixed-term-deposit.component';
 
 @NgModule({
-  declarations: [NewFixedTermDepositComponent],
+  declarations: [
+    NewFixedTermDepositComponent
+  ],
   imports: [
     FrontOfficeRoutingModule,
     SharedModule

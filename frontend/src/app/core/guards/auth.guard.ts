@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 // service
+import { SessionStorageService } from 'ngx-webstorage';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable({
@@ -11,22 +12,34 @@ import { AuthService } from '../auth/auth.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private sessionStorage: SessionStorageService,
+    private router: Router
+  ) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    let url: string = state.url;
-    return this.checkLogin(url);
-  }
-
-  private checkLogin(url: string): boolean {
     if (this.authService.isLoggedIn()) {
-      return true;
+      if (next.data.roles) {
+        const userData = this.sessionStorage.retrieve(AuthService.USER_STORAGE_KEY);
+        if (userData) {
+          for (let authority of userData.authorities) {
+            if (next.data.roles.includes(authority)) {
+              return true;
+            }
+          }
+          this.router.navigate([AuthService.ADMIN_HOME_URL]);
+          return false;
+        }
+      } else {
+        return true;
+      }
+    } else {
+      this.router.navigate([AuthService.LOGIN_URL], { queryParams: { returnUrl: state.url } });
+      return false;
     }
-    this.authService.redirectToUrl = url;
-    this.router.navigate(['/auth']);
-    return false;
   }
 
 }

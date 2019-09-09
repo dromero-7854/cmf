@@ -3,10 +3,14 @@ import { NgModule } from '@angular/core';
 import { BackOfficeRoutingModule } from './back-office-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 // components
-import { HomeComponent } from './components/home/home.component';
+import { AdminHomeComponent } from './components/admin-home/admin-home.component';
+import { SuperAdminHomeComponent } from './components/super-admin-home/super-admin-home.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [
+    AdminHomeComponent,
+    SuperAdminHomeComponent
+  ],
   imports: [
     BackOfficeRoutingModule,
     SharedModule
