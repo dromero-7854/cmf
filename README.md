@@ -1,4 +1,5 @@
 **Securing your Spring Boot and Angular app with JWT**
+
 **Frontend - Angular 7**
  - Angular Material 7.3.7
  - Bootstrap 4.3.1
