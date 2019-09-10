@@ -43,7 +43,13 @@ export class LoginComponent implements OnInit {
       return;
     }
     let credentials: Credentials = new Credentials(this.loginForm.get('username').value, this.loginForm.get('password').value);
-    this.authService.login(credentials);
+    this.authService.login(credentials).then(
+      () => { },
+      () => {
+        this.error = true;
+        this.loading = false;
+      }
+    );
   }
 
 }

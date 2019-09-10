@@ -4,10 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // interceptors
 import { JwtTokenInterceptor } from './interceptors/jwt.token.interceptor';
+// services
+import { TranslationService } from './services/translate.service';
 // layouts
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 // components
@@ -25,6 +28,7 @@ import { MainNavComponent } from './components/main-nav/main-nav.component';
     BrowserAnimationsModule,
     RouterModule,
     NgxWebstorageModule.forRoot(),
+    TranslateModule.forRoot(),
     SharedModule,
     HttpClientModule
   ],
@@ -40,12 +44,14 @@ import { MainNavComponent } from './components/main-nav/main-nav.component';
 export class CoreModule {
 
   constructor(
-    @Optional() @SkipSelf() parentModule: CoreModule
+    @Optional() @SkipSelf() parentModule: CoreModule,
+    private translate: TranslationService
   ) {
     if (parentModule) {
       throw new Error(
         'CoreModule is already loaded. Import it in the AppModule only');
     }
+    translate.init();
   }
 
 }

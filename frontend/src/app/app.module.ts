@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-// modules
+// routing
 import { AppRoutingModule } from './app-routing.module';
+// modules
 import { CoreModule } from './core/core.module';
 // components
 import { AppComponent } from './app.component';

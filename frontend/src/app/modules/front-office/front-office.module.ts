@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
-// modules
+// routing
 import { FrontOfficeRoutingModule } from './front-office-routing.module';
+// modules
+import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../shared/shared.module';
 // components
 import { NewFixedTermDepositComponent } from './components/new-fixed-term-deposit/new-fixed-term-deposit.component';
@@ -11,6 +13,7 @@ import { NewFixedTermDepositComponent } from './components/new-fixed-term-deposi
   ],
   imports: [
     FrontOfficeRoutingModule,
+    TranslateModule.forChild(),
     SharedModule
   ]
 })

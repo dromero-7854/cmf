@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
-// modules
+// routing
 import { BackOfficeRoutingModule } from './back-office-routing.module';
+// modules
+import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../shared/shared.module';
 // components
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
@@ -13,6 +15,7 @@ import { SuperAdminHomeComponent } from './components/super-admin-home/super-adm
   ],
   imports: [
     BackOfficeRoutingModule,
+    TranslateModule.forChild(),
     SharedModule
   ]
 })

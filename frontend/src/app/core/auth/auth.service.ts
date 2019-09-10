@@ -27,14 +27,17 @@ export class AuthService {
     private sessionStorage: SessionStorageService
   ) { }
 
-  public login(credentials: Credentials): void {
-    let returnUrl = this.route.snapshot.queryParams['returnUrl'] || AuthService.ADMIN_HOME_URL;
-    this.tokenService.getResponseHeaders(credentials)
-      .subscribe((res: HttpResponse<any>) => {
-        this.saveToken(res.headers.get('authorization'));
-        this.saveUserData();
-        this.router.navigate([returnUrl]);
-      });
+  public login(credentials: Credentials): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let returnUrl = this.route.snapshot.queryParams['returnUrl'] || AuthService.ADMIN_HOME_URL;
+      this.tokenService.getResponseHeaders(credentials)
+        .subscribe((res: HttpResponse<any>) => {
+          this.saveToken(res.headers.get('authorization'));
+          this.saveUserData();
+          this.router.navigate([returnUrl]);
+          resolve();
+        }, error => reject());
+    });
   }
 
   public logout(): void {
