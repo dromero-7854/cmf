@@ -9,7 +9,6 @@ export class NewFixedTermDepositComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

@@ -1,5 +1,5 @@
-// dependencies
 import { Injectable } from '@angular/core';
+// dependencies
 import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -11,7 +11,9 @@ import { environment as env } from '../../../environments/environment';
 })
 export class HttpClientService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   get<T>(
     options: {

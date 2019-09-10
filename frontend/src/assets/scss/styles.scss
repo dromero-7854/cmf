@@ -9,9 +9,6 @@
 @import '../../../node_modules/bootstrap/scss/bootstrap';
 
 @import "./themes/mat-theme";
-@include mat-core();
-@include angular-material-theme($mat-theme);
-
 @import "./components/mat-components";
 
 html, body {

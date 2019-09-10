@@ -12,15 +12,15 @@ import { SuperAdminHomeComponent } from './components/super-admin-home/super-adm
 const routes: Routes = [
   {
     path: 'admin-home',
-    component: AdminHomeComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin, Role.SuperAdmin] }
+    data: { roles: [Role.Admin, Role.SuperAdmin] },
+    component: AdminHomeComponent
   },
   {
     path: 'super-admin-home',
-    component: SuperAdminHomeComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.SuperAdmin] }
+    data: { roles: [Role.SuperAdmin] },
+    component: SuperAdminHomeComponent
   }
 ];
 

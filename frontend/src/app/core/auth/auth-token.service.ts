@@ -1,5 +1,5 @@
-// dependencies
 import { Injectable } from '@angular/core';
+// dependencies
 import { HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 // models

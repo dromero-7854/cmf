@@ -22,9 +22,11 @@ import {
   MatSnackBarModule
 } from '@angular/material';
 import { MatRippleModule } from '@angular/material/core';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   imports: [
+    LayoutModule,
     MatRippleModule,
     MatButtonModule,
     MatCardModule,

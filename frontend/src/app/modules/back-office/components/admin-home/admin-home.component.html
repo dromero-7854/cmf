@@ -10,13 +10,10 @@
   <div class="modal-footer">
   </div>
 </ng-template>
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <button mat-raised-button color="primary" (click)="open(content)" placement="bottom"
       ngbTooltip="Open modal">Primary</button>
-  </div>
-  <div class="row">
-    <button mat-raised-button color="primary" (click)="logout()">logout</button>
   </div>
   <div class="row" *ngIf="closeResult">
     <pre>{{closeResult}}</pre>

@@ -1,7 +1,8 @@
 export class Credentials {
   public constructor(
     public username: string,
-    public password: string) { };
+    public password: string
+  ) { };
 }
 
 export enum Role {

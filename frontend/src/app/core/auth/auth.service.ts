@@ -1,5 +1,5 @@
-// dependencies
 import { Injectable } from '@angular/core';
+// dependencies
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 // jwt decode

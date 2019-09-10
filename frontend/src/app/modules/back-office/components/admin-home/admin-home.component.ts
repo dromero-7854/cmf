@@ -1,8 +1,6 @@
-// dependencies
 import { Component, OnInit } from '@angular/core';
+// dependencies
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-// services
-import { AuthService } from 'src/app/core/auth/auth.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -14,8 +12,7 @@ export class AdminHomeComponent implements OnInit {
   closeResult: string;
 
   constructor(
-    private modalService: NgbModal,
-    private authService: AuthService
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() { }
@@ -36,10 +33,6 @@ export class AdminHomeComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
-  }
-
-  logout() {
-    this.authService.logout();
   }
 
 }
